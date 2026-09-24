@@ -57,9 +57,10 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
 
 
              </div>
+             <h2 className='text-2xl text-white'>INSTRUCTIONS</h2>
               <ol className='list-decimal py-2'>
  {data.instructions?.map((step,index)=>(
-<li key={index} className=' '>{step}</li>
+<li key={index} >{step}</li>
             ))}
             </ol>
              </div>
