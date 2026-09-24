@@ -26,6 +26,7 @@ const WorkoutCard = ({workout}:IWorkoutProps) => {
        <h4>{workout.rating}</h4>
       
        </div>
+       
        </div>
        </div>
    </Link> );

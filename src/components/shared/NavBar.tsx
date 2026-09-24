@@ -11,17 +11,17 @@ const NavBar = () => {
     <Image src={NavImg} alt="navbarimage" width={50} height={50} className=""/>
   <h4> FITLOG</h4>
   </div>
-  <div >
+ 
    <ul className='flex gap-4'>
     <li>
       <Link href='/'>WORKOUT</Link></li>
-    <li><Link href='/'>MY PLAN</Link></li>
+    <li><Link href=''>MY PLAN</Link></li>
        </ul>
-        </div>
-        <div className='flex gap-4'>
-          <Link href="/">PLAN</Link>
-          <li>SAVED</li>
-        </div>
+       
+        <ul className='flex gap-4'>
+         <li> <Link href="">PLAN</Link></li>
+          <li><Link href="">SAVED</Link></li>
+        </ul>
        </nav>
         
     );

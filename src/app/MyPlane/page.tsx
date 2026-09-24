@@ -63,11 +63,7 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
 <li key={index} >{step}</li>
             ))}
             </ol>
-            <div className='flex gap-6'>
-            <button className='bg-[#C2F800] py-2 px-4 rounded-md'>Add to today@s plan</button>
-                   <button className='border py-2 px-2'>Save for later</button>
-         </div>  
-           </div>
+             </div>
         </div>
     );
 };
