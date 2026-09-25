@@ -2,6 +2,7 @@ import { Iworkout } from '@/types/workout.type';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import WorkoutAddButton from './../Apps/WorkoutAddButton';
 interface IWorkoutProps{
     workout:Iworkout;
 }
@@ -26,8 +27,9 @@ const WorkoutCard = ({workout}:IWorkoutProps) => {
        <h4>{workout.rating}</h4>
       
        </div>
-       
+      
        </div>
+        
        </div>
    </Link> );
 };

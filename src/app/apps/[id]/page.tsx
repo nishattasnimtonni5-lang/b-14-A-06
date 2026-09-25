@@ -1,17 +1,11 @@
+import WorkoutAddButton from '@/components/Apps/WorkoutAddButton';
 import { getWorkoutDetails } from '@/lib/Apps';
 import { IWorkoutDetailsProps } from '@/types/workout.type';
 import Image from 'next/image';
 import React from 'react';
-
-
-
-
-
 const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
   const {id}=await params;
   const data=await getWorkoutDetails(id);
-  
-  
     return (
     <div className='flex gap-6'>
         <div>
@@ -63,10 +57,9 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
 <li key={index} >{step}</li>
             ))}
             </ol>
-            <div className='flex gap-6'>
-            <button className='bg-[#C2F800] py-2 px-4 rounded-md'>Add to today@s plan</button>
-                   <button className='border py-2 px-2'>Save for later</button>
-         </div>  
+           
+           <WorkoutAddButton data={data}/>
+        
            </div>
         </div>
     );
