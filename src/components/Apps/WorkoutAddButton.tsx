@@ -14,11 +14,11 @@ if(!context){
 const {todayPlan=[],setTodayPlan,savedPlan=[],setSavedPlan}=context;
 const handleAdd=()=>{
     setTodayPlan([...todayPlan,data]);
-    toast.success(`${data.name} installed successfully!`)
+    toast.success(`${data.name} added to today's plan.`)
 }
 const handleSave=()=>{
     setSavedPlan([...savedPlan,data]);
-    toast.success(`${data.name} installed successfully!`)
+    toast.success(`${data.name} added to saved plan.`)
 }
     return (
         <div className='gap-5'>

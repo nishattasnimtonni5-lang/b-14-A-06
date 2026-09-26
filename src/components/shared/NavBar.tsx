@@ -3,7 +3,7 @@ import React from 'react';
 import NavImg from "@/assets/logo.png"
 import Image from 'next/image';
 import Link from 'next/link';
-import PlanCount from './PlanCount';
+import PlanCount from './PLanAndSaved';
 const NavBar = () => {
 
     return (
@@ -21,8 +21,8 @@ const NavBar = () => {
        </ul>
        
         <ul className='flex gap-4'>
-         <li> <Link href="/apps">PLAN <PlanCount/></Link></li>
-          <li><Link href="">SAVED</Link></li>
+         <li> <Link href="/apps">PLAN <PlanCount type='today'/></Link></li>
+          <li><Link href="/apps">SAVED<PlanCount type='saved'/></Link></li>
         </ul>
        </nav>
         

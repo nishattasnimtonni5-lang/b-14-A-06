@@ -3,9 +3,9 @@ import React from 'react';
 import BannerImg from '@/assets/banner.png'
 const BannerPage = () => {
     return (
-        <div className='bg-[#222630] h-100 flex justify-between '>
+        <div className='bg-[#222630] h-120 flex justify-between items-center '>
            
-<div>
+<div className='px-20'>
                <p className='text-[#C2F800] font-bold'> WORKOUT LIBRARY
                 </p>  
                  
@@ -17,7 +17,7 @@ const BannerPage = () => {
 
 <p className='text-[#9CA3AF]'>into today&apos;s plan, and watch the week&apos;s work add up.</p>
        </div> 
-        <Image src={BannerImg} alt="Banner"/>
+        <Image src={BannerImg} alt="Banner" className='mx-35'/>
         
     
         </div>
