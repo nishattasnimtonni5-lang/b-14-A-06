@@ -14,36 +14,36 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
        
             )}
             </div>
-            <div>
-                 <p className='text-4xl font-bold'>{data.name}</p>
-       <p>{data.equipment}</p>
-                  <div className='flex gap-3 py-4'>
+            <div className='pl-5'>
+                 <p className='text-white text-4xl font-bold pb-3'>{data.name}</p>
+       <p className='text-gray-500'>{data.description}</p>
+                  <div className='flex gap-3 text-gray-500  py-4'>
             {data.muscleGroups?.map((group,index)=>(
-<span key={index} className=' rounded-lg px-3  '>{group}</span>
+<span key={index} className=' rounded-lg px-3 bg-[#C2F800] text-black pb-2 '>{group}</span>
             ))}
              </div>
              <div className='w-80  bg-[#232834] rounded-lg '>
-<div className='flex justify-between py-2 border-b text-white px-5'>
+<div className='flex justify-between py-2 border-b border-gray-500 text-gray-400 px-5'>
     <h4>EQUIPMENT</h4>
     <h4>{data.equipment}</h4>
     </div>
-    <div className='flex justify-between py-2 border-b text-white px-5'>
+    <div className='flex justify-between py-2 border-b  border-gray-500 text-gray-400 px-5'>
 <h4>DIFFICULTY</h4>
 <h4>{data.difficulty}</h4>
 </div>
-<div className='flex justify-between py-2 border-b text-white px-5 '>
+<div className='flex justify-between py-2 border-b  border-gray-500 text-gray-400 px-5 '>
 <h4>SETS</h4>
 <h4>{data.sets}</h4></div>
-<div className='flex justify-between py-2 border-b text-white px-5'>
+<div className='flex justify-between py-2 border-b  border-gray-500 text-gray-400 px-5'>
 <h4>REPS</h4>
 <h4>{data.reps}</h4></div>
-<div className='flex justify-between py-2 border-b text-white px-5'>
+<div className='flex justify-between py-2 border-b  border-gray-500 text-gray-400 px-5'>
 <h4>DURATION</h4>
 <h4>{data.duration}</h4></div>
-<div className='flex justify-between py-2 border-b text-white px-5'>
+<div className='flex justify-between py-2 border-b  border-gray-500 text-gray-400 px-5'>
 <h4>CALORIES</h4><h4>{data.caloriesBurned}</h4>
 </div>
-<div className='flex justify-between py-2 border-b text-white px-5' >
+<div className='flex justify-between py-2  text-gray-400 px-5' >
 <h4>RATING</h4>
 <h4>{data.rating}</h4>
 </div>
@@ -51,8 +51,8 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
 
 
              </div>
-             <h2 className='text-2xl text-white'>INSTRUCTIONS</h2>
-              <ol className='list-decimal py-2'>
+             <h2 className='text-2xl text-white pt-4'>INSTRUCTIONS</h2>
+              <ol className='list-decimal py-3 text-gray-500 px-3 '>
  {data.instructions?.map((step,index)=>(
 <li key={index} >{step}</li>
             ))}
