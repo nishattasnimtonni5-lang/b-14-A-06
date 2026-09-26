@@ -25,39 +25,39 @@ const MyPlan = () => {
     setTodayPlan(todayPlan.filter((workout)=>String(workout.id)!==String(id)))
    }
     return (
-        <div className=""> 
+        <div className="px-8"> 
         <h2 className="text-white text-2xl pl-7 py-3">My Plan</h2>
          <p className="text-gray-500 pl-7 pb-5">Cap of five lifts for today. Finish them, then load more.</p>
         
          
-      <div className="bg-gray-200 w-full  flex justify-between items-center px-20 py-10 rounded-lg h-40">
+      <div className="bg-gray-900 w-full  flex justify-between items-center px-20 py-10 rounded-lg h-40">
         <div>
-            <p>Exercises</p>
-        <h2>
+            <p className="text-gray-500">Exercises</p>
+        <h2 className="text-white">
           {activeTab==="today"?todayPlan.length:savedPlan.length}</h2>
         </div>
         <div>
-            <p>Minutes</p>
-            <h2
+            <p className="text-gray-500">Minutes</p>
+            <h2 className="text-white"
             >{activeTab==="today"?totalTime:savedTime}</h2>
             </div>
     <div>
-        <p>Calories</p>
-        <h2>{activeTab==="today"? totalCalories:savedCalories}</h2>
+        <p className="text-gray-500">Calories</p>
+        <h2 className="text-white">{activeTab==="today"? totalCalories:savedCalories}</h2>
         </div>
      
       </div>
-         <div className="flex gap-5"> 
+         <div className="flex gap-5 py-5"> 
           <button
           onClick={()=>
             setActiveTab("today")
           }
-          className='px-5 bg-amber-400 rounded-lg '>Today@s Plan </button>
+          className='px-5 py-2 bg-[#C2F800] rounded-lg'>Today@s Plan </button>
           
            <button
           onClick={()=>
             setActiveTab("saved")
-          }>Saved </button>
+          } className="border border-gray-500 px-5 rounded-lg py-2 text-gray-500">Saved </button>
           </div>
 
      {activeTab==="today"&&(
@@ -91,7 +91,9 @@ const MyPlan = () => {
             })}
            
      </div> 
-        ):( <p>No Plan today</p>)}
+        ):( <p>No Plan today</p>
+         
+        )}
             
             </>
          )}
