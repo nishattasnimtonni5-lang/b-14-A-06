@@ -19,7 +19,7 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
        <p>{data.equipment}</p>
                   <div className='flex gap-3 py-4'>
             {data.muscleGroups?.map((group,index)=>(
-<span key={index} className='bg-[#C2F800] rounded-lg px-3  '>{group}</span>
+<span key={index} className=' rounded-lg px-3  '>{group}</span>
             ))}
              </div>
              <div className='w-80  bg-[#232834] rounded-lg '>
