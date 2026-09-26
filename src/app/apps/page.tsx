@@ -5,6 +5,10 @@ import { Iworkout } from '@/types/workout.type';
 import Image from 'next/image';
 import React, { useContext,useState } from 'react';
 import Link from 'next/link';
+import { MdDone } from 'react-icons/md'
+import { BiTime } from 'react-icons/bi'
+import { GoFlame } from 'react-icons/go'
+import { FiStar } from 'react-icons/fi'
 
 const MyPlan = () => {
    const context=useContext(PlanContext)
@@ -53,7 +57,7 @@ const MyPlan = () => {
           onClick={()=>
             setActiveTab("today")
           }
-          className='px-5 py-2 bg-[#C2F800] rounded-lg'>Today@s Plan </button>
+          className='px-5 py-2 bg-[#C2F800] rounded-lg'>Today&apos;s Plan </button>
           
            <button
           onClick={()=>
@@ -65,28 +69,30 @@ const MyPlan = () => {
       <>
 
             {todayPlan.length>0?(
-     <div className='grid grid-cols-1 w-full bg-gray-200'>
+     <div className='grid grid-cols-1 w-full bg-gray-900 rounded-md'>
            { todayPlan.map((workout:Iworkout,ind:number)=>{
-            return (<div key={ind} className="flex justify-between">
-                <div>
-                    <Image src={workout.image} alt="workoutImage" width={100} height={100} className='rounded-lg'/>
-               <h3>{workout.name}</h3>
+            return (<div key={ind} className="flex items-center justify-between">
+                <div className="px-5 py-5 flex gap-5">
+                    <Image src={workout.image} alt="workoutImage" width={100} height={50} className='rounded-lg w-35 h-20 '/>
+             <div >
+               <h3 className="text-white pb-2">{workout.name}</h3>
                <div className="flex gap-5">
-                <h2>{workout.duration}</h2>
-                <h2>{workout.caloriesBurned}</h2>
-                <h2>{workout.rating}</h2>
+                 <h4 className="flex items-center gap-1 text-white "><BiTime className="text-[#C2F800]"/>{workout.duration}</h4>
+                       <h4 className="flex items-center gap-1 text-white">< GoFlame className="text-[#C2F800]"/>{workout.caloriesBurned}</h4>
+                       <h4 className="flex items-center gap-1 text-white">< FiStar className="text-[#C2F800]"/>{workout.rating}</h4>
+                  </div>    
             </div> 
            
               </div>
-              <div>
+              <div className="flex gap-4 px-10">
                <button
                
-               className="bg-gray-200 rounded-md">View Details</button>
+               className="border border-gray-500 text-white hover:bg-white hover:text-black px-4 py-2 rounded-3xl">View Details</button>
               <button 
               onClick={()=>
                 handleRemove(String(workout.id))
                }
-              className="bg-red-500 rounded-md">Mark as done</button>
+              className="bg-[#C2F800] px-3 py-2 hover:bg-yellow-400 flex items-center gap-1   rounded-3xl"><MdDone/>Mark as done</button>
                 </div>
             </div>)
             })}
@@ -109,28 +115,28 @@ const MyPlan = () => {
           <>
 
             {savedPlan.length>0?(
-     <div className='grid grid-cols-1 w-full bg-gray-200'>
+      <div className='grid grid-cols-1 w-full bg-gray-900 rounded-md'>
            { savedPlan.map((workout:Iworkout,ind:number)=>{
-            return (<div key={ind} className="flex justify-between">
-                <div>
-                    <Image src={workout.image} alt="workoutImage" width={100} height={100} className='rounded-lg'/>
-               <h3>{workout.name}</h3>
+            return (<div key={ind} className="flex items-center justify-between pr-10 pl-3 ">
+                <div className="px-5 py-5 flex gap-5">
+                    <Image src={workout.image} alt="workoutImage" width={100} height={50} className='rounded-lg w-35 h-20 '/>
+             <div >
+               <h3 className="text-white pb-2">{workout.name}</h3>
                <div className="flex gap-5">
-                <h2>{workout.duration}</h2>
-                <h2>{workout.caloriesBurned}</h2>
-                <h2>{workout.rating}</h2>
+                 <h4 className="flex items-center gap-1 text-white "><BiTime className="text-[#C2F800]"/>{workout.duration}</h4>
+                       <h4 className="flex items-center gap-1 text-white">< GoFlame className="text-[#C2F800]"/>{workout.caloriesBurned}</h4>
+                       <h4 className="flex items-center gap-1 text-white">< FiStar className="text-[#C2F800]"/>{workout.rating}</h4>
+                  </div>    
             </div> 
            
               </div>
               <div>
-               <button
-               
-               className="bg-gray-200 rounded-md">View Details</button>
+              
               <button 
               onClick={()=>
                 handleRemove(String(workout.id))
                }
-              className="bg-red-500 rounded-md">Mark as done</button>
+              className="border border-gray-500 text-gray-500 px-3 py-2  rounded-3xl hover:bg-white hover:text-black"><Link href={`/apps/${workout.id}`}>View Details</Link></button>
                 </div>
             </div>)
             })}
@@ -140,7 +146,7 @@ const MyPlan = () => {
         <div className="text-center"> 
           <p className="text-gray-500 text-xl">No saved plan</p>
           <p className="text-gray-500 pb-8">Browse the library and save a lift to get today moving.</p>
-        <button><Link href="/" className="bg-[#C2F800] px-4 py-2 rounded-xl ">Go to workouts</Link></button>
+        <button><Link href='/apps' className="bg-[#C2F800] px-4 py-2 rounded-xl ">Go to workouts</Link></button>
         </div>)}
             
             </>
