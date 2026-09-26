@@ -20,7 +20,7 @@ const BannerPage = () => {
 
 <p className=' text-[#9CA3AF]'>into today&apos;s plan, and watch the week&apos;s work add up.</p>
        </div>
-      <Link href="#workouts" className='bg-[#C2F800] px-5 py-2 rounded-2xl text-sm ' >BROWSE WORKOUTS</Link>
+      <Link href="#workouts" className='bg-[#C2F800] hover:bg-white hover:text-black px-5 py-2 rounded-2xl text-sm ' >BROWSE WORKOUTS</Link>
         </div> 
         <Image src={BannerImg} alt="Banner" className='mx-35'/>
         

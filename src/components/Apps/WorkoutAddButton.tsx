@@ -21,9 +21,9 @@ const handleSave=()=>{
     toast.success(`${data.name} added to saved plan.`)
 }
     return (
-        <div className='gap-5'>
+        <div className='flex gap-5'>
             <button onClick={()=>handleAdd()}
-            className='bg-[#C2F800] py-3 px-3 rounded-lg'>Add to today@s plan</button>
+            className='bg-[#C2F800] py-3 px-3 rounded-lg  hover:bg-white hover:text-black'>Add to today&apos;s plan</button>
                    <button 
                    onClick={()=>handleSave()}
                    >Save for later</button>

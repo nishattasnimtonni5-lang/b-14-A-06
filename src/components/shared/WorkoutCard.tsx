@@ -10,7 +10,7 @@ interface IWorkoutProps{
 const WorkoutCard = ({workout}:IWorkoutProps) => {
     return (
         <Link href={`/apps/${workout.id}`} className='py-1 px-1'>
-        <div className='border border-gray-500 bg-[#222630] pb-5 rounded-lg overflow-hidden transition-all duration-200 hover:border-[#C2F800] ease-out hover:-translate-y-1 hover:-shadow-xl hover:shadow-lg  '>
+        <div className='border border-gray-500 bg-[#222630] pb-5 rounded-lg overflow-hidden transition-all duration-200 hover:border-[#C2F800] ease-out hover:-translate-y-1 hover:-shadow-xl hover:shadow-lg   '>
             <Image src={workout.image} alt="workoutImg" width={150} height={100} className=' w-full h-70' />
           <div>
            <div className='flex gap-3 py-4 px-7'>

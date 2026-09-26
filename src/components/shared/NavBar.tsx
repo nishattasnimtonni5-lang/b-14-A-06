@@ -7,7 +7,7 @@ import PlanCount from './PLanAndSaved';
 const NavBar = () => {
 
     return (
-        <div>
+        <div className='sticky top-0 z-50'>
             <nav className="navbar shadow-sm flex justify-between items-center bg-black">
   <div className="flex items-center gap-5 pl-20">
     <Image src={NavImg} alt="navbarimage" width={30} height={40} />
@@ -21,8 +21,8 @@ const NavBar = () => {
        </ul>
        
         <ul className='flex gap-4 px-10'>
-         <li> <Link href="/apps" className='text-gray-500'>PLAN <PlanCount type='today'/></Link></li>
-          <li><Link href="/apps" className='text-gray-500'>SAVED<PlanCount type='saved'/></Link></li>
+         <li> <Link href="/apps" className='text-gray-500 flex gap-2'>PLAN <PlanCount type='today'/></Link></li>
+          <li><Link href="/apps" className='text-gray-500 flex gap-2'>SAVED<PlanCount type='saved'/></Link></li>
         </ul> 
          </nav>
        
