@@ -26,18 +26,9 @@ const MyPlan = () => {
    }
     return (
         <div className=""> 
-         <div className="flex gap-5"> 
-          <button
-          onClick={()=>
-            setActiveTab("today")
-          }
-          className='px-5 bg-amber-400 rounded-lg '>Today@s Plan </button>
-          
-           <button
-          onClick={()=>
-            setActiveTab("saved")
-          }>Saved </button>
-          </div>
+        <h2 className="text-white text-2xl pl-7 py-3">My Plan</h2>
+         <p className="text-gray-500 pl-7 pb-5">Cap of five lifts for today. Finish them, then load more.</p>
+        
          
       <div className="bg-gray-200 w-full  flex justify-between items-center px-20 py-10 rounded-lg h-40">
         <div>
@@ -56,7 +47,18 @@ const MyPlan = () => {
         </div>
      
       </div>
-
+         <div className="flex gap-5"> 
+          <button
+          onClick={()=>
+            setActiveTab("today")
+          }
+          className='px-5 bg-amber-400 rounded-lg '>Today@s Plan </button>
+          
+           <button
+          onClick={()=>
+            setActiveTab("saved")
+          }>Saved </button>
+          </div>
 
      {activeTab==="today"&&(
       <>
