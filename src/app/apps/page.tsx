@@ -4,6 +4,7 @@ import WorkoutCard from '@/components/shared/WorkoutCard';
 import { Iworkout } from '@/types/workout.type';
 import Image from 'next/image';
 import React, { useContext,useState } from 'react';
+import Link from 'next/link';
 
 const MyPlan = () => {
    const context=useContext(PlanContext)
@@ -91,7 +92,11 @@ const MyPlan = () => {
             })}
            
      </div> 
-        ):( <p>No Plan today</p>
+        ):(<div className="text-center"> 
+          <p className="text-gray-500 text-xl">No Plan today</p>
+          <p className="text-gray-500 pb-8">Browse the library and add a lift to get today moving.</p>
+        <button><Link href="/" className="bg-[#C2F800] px-4 py-2 rounded-xl ">Go to workouts</Link></button>
+        </div>
          
         )}
             
@@ -131,7 +136,12 @@ const MyPlan = () => {
             })}
            
      </div> 
-        ):( <p>No saved workout</p>)}
+        ):( 
+        <div className="text-center"> 
+          <p className="text-gray-500 text-xl">No saved plan</p>
+          <p className="text-gray-500 pb-8">Browse the library and save a lift to get today moving.</p>
+        <button><Link href="/" className="bg-[#C2F800] px-4 py-2 rounded-xl ">Go to workouts</Link></button>
+        </div>)}
             
             </>
          )}
