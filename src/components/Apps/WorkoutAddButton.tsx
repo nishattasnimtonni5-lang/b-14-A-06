@@ -14,10 +14,24 @@ if(!context){
 }
 const {todayPlan=[],setTodayPlan,savedPlan=[],setSavedPlan}=context;
 const handleAdd=()=>{
+    const alreadyAdded=todayPlan.some(
+        (workout)=>String(workout.id)===String(data.id)
+    );
+    if(alreadyAdded){
+        toast.info(`${data.name} is already in today's plan.`);
+        return;
+    }
     setTodayPlan([...todayPlan,data]);
     toast.success(`${data.name} added to today's plan.`)
-}
+};
 const handleSave=()=>{
+     const alreadySaved=savedPlan.some(
+        (workout)=>String(workout.id)===String(data.id)
+    );
+    if(alreadySaved){
+        toast.info(`${data.name} is already in saved plan.`);
+        return;
+    }
     setSavedPlan([...savedPlan,data]);
     toast.success(`${data.name} added to saved plan.`)
 }

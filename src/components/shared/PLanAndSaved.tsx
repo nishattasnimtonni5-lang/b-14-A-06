@@ -12,7 +12,7 @@ const PlanCount = ({type}:PlanAndSavedProps) => {
     }
     const {todayPlan,savedPlan}=context;
     return (
-        <div className='text-[#C2F800]'>
+        <div className='bg-[#C2F800] text-black px-2 rounded-full '>
             {type=== 'today' ?todayPlan.length:savedPlan.length}
         </div>
     );

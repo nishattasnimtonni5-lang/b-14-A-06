@@ -17,8 +17,8 @@ const NavBar = () => {
  
   <Activelink/>
         <ul className='flex gap-4 px-10'>
-         <li> <Link href="/apps" className='text-gray-500 flex gap-2'>PLAN <PlanCount type='today'/></Link></li>
-          <li><Link href="/apps" className='text-gray-500 flex gap-2'>SAVED<PlanCount type='saved'/></Link></li>
+         <li> <Link href="/apps" className='text-gray-300 flex gap-2'>PLAN <PlanCount type='today'/></Link></li>
+          <li><Link href="/apps" className='text-gray-300 flex gap-2'>SAVED<PlanCount type='saved'/></Link></li>
         </ul> 
          </nav>
        

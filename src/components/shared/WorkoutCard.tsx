@@ -24,9 +24,9 @@ const WorkoutCard = ({workout}:IWorkoutProps) => {
       </div>
       <hr className='text-gray-500 py-2 w-7/8 mx-auto ' />
       <div className='flex gap-10 px-7 text-gray-400'>
-       <h4 className="flex items-center gap-1 "><BiTime/>{workout.duration}</h4>
-       <h4 className="flex items-center gap-1">< GoFlame/>{workout.caloriesBurned}</h4>
-       <h4 className="flex items-center gap-1">< FiStar/>{workout.rating}</h4>
+       <h4 className="flex items-center gap-1 text-[#C2F800] "><BiTime/>{workout.duration}</h4>
+       <h4 className="flex items-center gap-1 text-[#C2F800]">< GoFlame/>{workout.caloriesBurned}</h4>
+       <h4 className="flex items-center gap-1 text-[#C2F800]">< FiStar/>{workout.rating}</h4>
       
        </div>
       

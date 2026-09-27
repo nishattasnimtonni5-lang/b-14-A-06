@@ -10,7 +10,8 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
     <div className='flex gap-6'>
         <div>
             {data?.image&&(
-            <Image src={data.image} alt="workoutImage" width={500} height={200}/>
+            <Image src={data.image} alt="workoutImage" width={500} height={200} 
+             className="rounded-xl"/>
        
             )}
             </div>
@@ -52,7 +53,7 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
 
              </div>
              <h2 className='text-2xl text-white pt-4'>INSTRUCTIONS</h2>
-              <ol className='list-decimal py-3 text-gray-500 px-3 '>
+              <ol className='list-decimal py-3 text-gray-500 px-3  '>
  {data.instructions?.map((step,index)=>(
 <li key={index} >{step}</li>
             ))}
