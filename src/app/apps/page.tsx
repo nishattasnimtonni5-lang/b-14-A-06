@@ -1,6 +1,6 @@
 'use client';
 import { PlanContext } from '@/app/context/PlanContext';
-import WorkoutCard from '@/components/shared/WorkoutCard';
+
 import { Iworkout } from '@/types/workout.type';
 import Image from 'next/image';
 import React, { useContext,useState } from 'react';
@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 const MyPlan = () => {
    const context=useContext(PlanContext)
    const [activeTab,setActiveTab]=useState("today")
+    const [sortBy,setSortBy]=useState('default')
    if (!context){
     return null;
    }
@@ -37,6 +38,20 @@ const MyPlan = () => {
     setSavedPlan(savedPlan.filter((workout)=>String(workout.id)!==String(id)));
     toast.success(`${name} removed succesfully!`)
    }
+  
+   const currentPlan=activeTab==='today'?todayPlan:savedPlan;
+   const sortedPlan=[...currentPlan].sort((a,b)=>{
+    if(sortBy==='duration'){
+      return Number(b.duration)-Number(a.duration)
+    };
+    if(sortBy==='calories'){
+      return Number(b.caloriesBurned)-Number(a.caloriesBurned)
+    };
+    if(sortBy==='rating'){
+      return Number(b.rating)-Number(a.rating)
+    };
+    return 0;
+   })
     return (
         <div className="px-8"> 
         <h2 className="text-white text-2xl pl-7 py-3">My Plan</h2>
@@ -60,7 +75,7 @@ const MyPlan = () => {
         </div>
      
       </div>
-      <div className="py-5">
+      <div className="py-5 flex justify-between">
          <div className="flex gap-1 px-2  bg-gray-800 w-50 items-center rounded-2xl h-15 py-5"> 
           <button
           onClick={()=>
@@ -73,13 +88,26 @@ const MyPlan = () => {
             setActiveTab("saved")
           }  className={`px-5 py-2 rounded-lg ${activeTab==='saved'?"text-[#C2F800] bg-black":" text-gray-500"}`}>Saved </button>
           </div>
+          <div className="flex items-center gap-2">
+            <label className="text-gray-500">
+              Sort by
+              </label >
+              <select value={sortBy}
+              onChange={(e)=>setSortBy(e.target.value)}
+              className="text-gray-500 border rounded-xl px-2 py-2">
+                <option value="default">Default</option>
+                <option value="duration">Duration</option>
+                <option value="rating">Rating</option>
+                <option value="calories">Calories</option>
+                </select>
+          </div>
 </div>
      {activeTab==="today"&&(
       <>
 
             {todayPlan.length>0?(
      <div className='md:grid md:grid-cols-1 w-full gap-2  rounded-md'>
-           { todayPlan.map((workout:Iworkout,ind:number)=>{
+           { sortedPlan.map((workout:Iworkout,ind:number)=>{
             return (<div key={ind} className="flex items-center justify-between rounded-xl bg-gray-900 gap-4 md:gap-0">
                 <div className="md:px-5 py-5 flex md:gap-5 gap-1">
                     <Image src={workout.image} alt="workoutImage" width={100} height={50} className='rounded-lg md:w-35 w-10 md:h-20 '/>
@@ -134,7 +162,7 @@ const MyPlan = () => {
 
             {savedPlan.length>0?(
       <div className='grid grid-cols-1 w-full rounded-md gap-2'>
-           { savedPlan.map((workout:Iworkout,ind:number)=>{
+           { sortedPlan.map((workout:Iworkout,ind:number)=>{
             return (<div key={ind} className="flex items-center justify-between  bg-gray-900  md:px-5 gap-4 md:gap-0 rounded-xl" >
                 <div className=" py-5 flex gap-5">
                     <Image src={workout.image} alt="workoutImage" width={100} height={50} className='rounded-lg w-10 md:w-35 h-20 '/>
