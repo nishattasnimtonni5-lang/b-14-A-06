@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Fit Log
 
-First, run the development server:
+FITLOG is a modern fitness tracking web application designed to help users easily create and manage their daily workout routines. It allows users to build personalized daily plans and save their favorite exercises for quick access. The app automatically calculates total workout duration and estimated calories burned to keep users informed of their progress. Built with Next.js and Tailwind CSS, it offers a seamless, fast, and fully responsive experience across all devices. FITLOG aims to keep users motivated and focused on achieving their healthy lifestyle goals every day.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Client:** Next.js, Redux, TailwindCSS,TypeScript,Javascript
 
-## Learn More
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Daily Workout Management:** Effortlessly add, view, and remove exercises from your daily plan.
+- **Saved Workout Collection:** Bookmark and manage your favorite workout routines for future reference.
+- **Real-Time Calorie & Duration Tracking:** Automatically computes total time spent and estimated calories burned based on your active plan.
+- **Interactive State Notifications:** Clean toast notifications (via `react-hot-toast`) offer immediate visual feedback for actions like removing exercises.
+- **Fully Responsive Design:** Seamless user experience across mobile and desktop (`md`) screen layouts using custom Tailwind CSS design patterns.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
