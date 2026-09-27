@@ -8,7 +8,7 @@ const BannerPage = () => {
         <div className='px-6  rounded-2xl py-5'>
         <div className='bg-[#222630] md:h-120   md:flex justify-between items-center rounded-2xl'>
            
-<div className='px-20'>
+<div className='px-20 '>
                <p className='text-[#C2F800] text-xs py-5 font-bold'> WORKOUT LIBRARY
                 </p>  
                  
@@ -23,7 +23,7 @@ const BannerPage = () => {
        </div>
     <BrowseWorkoutButton/>
         </div> 
-        <Image src={BannerImg} alt="Banner" className='md:mx-35 mx-auto md:pt-0 pt-8'/>
+        <Image src={BannerImg} alt="Banner" className='md:mx-35 mx-auto md:pt-0  pt-8'/>
         
     
         </div>

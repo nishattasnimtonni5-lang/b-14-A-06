@@ -15,6 +15,6 @@ FITLOG is a modern fitness tracking web application designed to help users easil
 - **Saved Workout Collection:** Bookmark and manage your favorite workout routines for future reference.
 - **Real-Time Calorie & Duration Tracking:** Automatically computes total time spent and estimated calories burned based on your active plan.
 - **Interactive State Notifications:** Clean toast notifications (via `react-hot-toast`) offer immediate visual feedback for actions like removing exercises.
-- **Fully Responsive Design:** Seamless user experience across mobile and desktop (`md`) screen layouts using custom Tailwind CSS design patterns.
+- **Fully Responsive Design:** Seamless user experience across mobile,tablet and desktop (`md`) screen layouts using custom Tailwind CSS design patterns.
 
 

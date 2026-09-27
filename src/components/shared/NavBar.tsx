@@ -10,7 +10,7 @@ const NavBar = () => {
     return (
         <div className='sticky top-0 z-50'>
             <nav className="navbar shadow-sm py-7 md:py-5 flex justify-between items-center bg-black">
-  <div className="flex items-center gap-1 md:pr-0  pr-3  md:gap-5 md:pl-20">
+  <div className="flex items-center gap-1 md:pr-0 pr-3  md:gap-5 md:pl-20">
     <Image src={NavImg} alt="navbarimage" width={30} height={40} />
   <h4 className='text-white  '> FITLOG</h4>
   </div>
