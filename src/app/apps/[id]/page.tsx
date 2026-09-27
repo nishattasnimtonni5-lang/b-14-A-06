@@ -7,11 +7,11 @@ const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
   const {id}=await params;
   const data=await getWorkoutDetails(id);
     return (
-    <div className='flex gap-6'>
+    <div className='md:flex gap-6'>
         <div>
             {data?.image&&(
             <Image src={data.image} alt="workoutImage" width={500} height={200} 
-             className="rounded-xl"/>
+             className="rounded-xl md:w-150  w-full "/>
        
             )}
             </div>
