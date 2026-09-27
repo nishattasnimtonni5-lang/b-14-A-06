@@ -160,7 +160,7 @@ const MyPlan = () => {
         <div className="text-center"> 
           <p className="text-gray-500 text-xl">No saved plan</p>
           <p className="text-gray-500 pb-8">Browse the library and save a lift to get today moving.</p>
-        <button><Link href='/apps' className="bg-[#C2F800] px-4 py-2 rounded-xl ">Go to workouts</Link></button>
+        <button><Link href='/' className="bg-[#C2F800] px-4 py-2 rounded-xl ">Go to workouts</Link></button>
         </div>)}
             
             </>
