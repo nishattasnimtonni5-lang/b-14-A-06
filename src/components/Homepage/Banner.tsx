@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import React from 'react';
+
 import BannerImg from '@/assets/banner.png'
-import Link from 'next/link';
+
+import BrowseWorkoutButton from './BrowseWorkoutButton';
 const BannerPage = () => {
     return (
         <div className='px-6  rounded-2xl py-5'>
@@ -20,7 +21,7 @@ const BannerPage = () => {
 
 <p className=' text-[#9CA3AF]'>into today&apos;s plan, and watch the week&apos;s work add up.</p>
        </div>
-      <Link href="#workouts" className='bg-[#C2F800] hover:bg-white hover:text-black px-5 py-2 rounded-2xl text-sm ' >BROWSE WORKOUTS</Link>
+    <BrowseWorkoutButton/>
         </div> 
         <Image src={BannerImg} alt="Banner" className='md:mx-35 mx-auto md:pt-0 pt-8'/>
         
