@@ -9,7 +9,7 @@ import { MdDone } from 'react-icons/md'
 import { BiTime } from 'react-icons/bi'
 import { GoFlame } from 'react-icons/go'
 import { FiStar } from 'react-icons/fi'
-
+import { ImCross } from "react-icons/im";
 const MyPlan = () => {
    const context=useContext(PlanContext)
    const [activeTab,setActiveTab]=useState("today")
@@ -52,19 +52,20 @@ const MyPlan = () => {
         </div>
      
       </div>
-         <div className="flex gap-5 py-5"> 
+      <div className="py-5">
+         <div className="flex gap-1 px-2  bg-gray-800 w-50 items-center rounded-2xl h-15 py-5"> 
           <button
           onClick={()=>
             setActiveTab("today")
           }
-          className='px-5 py-2 bg-[#C2F800] rounded-lg'>Today&apos;s Plan </button>
+          className={`px-3 py-3  rounded-lg ${activeTab==='today'?" text-[#C2F800] bg-black ":" text-gray-500"}`}>Today&apos;s Plan </button>
           
            <button
           onClick={()=>
             setActiveTab("saved")
-          } className="border border-gray-500 px-5 rounded-lg py-2 text-gray-500">Saved </button>
+          }  className={`px-5 py-2 rounded-lg ${activeTab==='saved'?"text-[#C2F800] bg-black":" text-gray-500"}`}>Saved </button>
           </div>
-
+</div>
      {activeTab==="today"&&(
       <>
 
@@ -88,12 +89,21 @@ const MyPlan = () => {
                <button
                
                className="border border-gray-500 text-white hover:bg-white hover:text-black px-4 py-2 rounded-3xl">View Details</button>
+             
+             <div className="flex gap-3">
               <button 
               onClick={()=>
                 handleRemove(String(workout.id))
                }
               className="bg-[#C2F800] px-3 py-2 hover:bg-yellow-400 flex items-center gap-1   rounded-3xl"><MdDone/>Mark as done</button>
-                </div>
+                <button
+             onClick={()=>
+              handleRemove(String(workout.id))
+             }
+            className='hover:text-red-500 text-gray-400'
+            ><ImCross /></button>
+              </div> 
+               </div>
             </div>)
             })}
            
@@ -130,13 +140,17 @@ const MyPlan = () => {
             </div> 
            
               </div>
-              <div>
+              <div className='flex gap-3'>
               
               <button 
-              onClick={()=>
-                handleRemove(String(workout.id))
-               }
+
               className="border border-gray-500 text-gray-500 px-3 py-2  rounded-3xl hover:bg-white hover:text-black"><Link href={`/apps/${workout.id}`}>View Details</Link></button>
+             <button
+             onClick={()=>
+              handleRemove(String(workout.id))
+             }
+            className='hover:text-red-500 text-gray-400'
+            ><ImCross /></button>
                 </div>
             </div>)
             })}
