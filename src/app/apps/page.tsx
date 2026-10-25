@@ -3,25 +3,48 @@ import { PlanContext } from '@/app/context/PlanContext';
 
 import { Iworkout } from '@/types/workout.type';
 import Image from 'next/image';
-import React, { Suspense, useContext,useState } from 'react';
+import React, { Suspense, useContext } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { MdDone } from 'react-icons/md'
 import { BiTime } from 'react-icons/bi'
 import { GoFlame } from 'react-icons/go'
 import { FiStar } from 'react-icons/fi'
 import { ImCross } from "react-icons/im";
 import { toast } from 'react-toastify';
+
+// Whitelist for ?sort= — anything else in the URL falls back to 'default'.
+const SORTS:string[]=['duration','rating','calories'];
+
 const MyPlanContent = () => {
    const context=useContext(PlanContext)
-   // The active tab lives in the URL (?tab=saved) so the nav links, sharing,
-   // and browser back/forward all select the right tab.
+   // Tab and sort both live in the URL (?tab=saved&sort=duration) so links,
+   // sharing, and browser back/forward all select the right view.
    const searchParams=useSearchParams()
+   const router=useRouter()
    const activeTab=searchParams.get('tab')==='saved'?'saved':'today'
-    const [sortBy,setSortBy]=useState('default')
+   const sortBy=SORTS.includes(searchParams.get('sort')??'')?searchParams.get('sort')!:'default'
    if (!context){
     return null;
    }
+
+   const navigateWith=(mutate:(params:URLSearchParams)=>void)=>{
+    const params=new URLSearchParams(searchParams.toString());
+    mutate(params);
+    const query=params.toString();
+    router.push(query?`/apps?${query}`:'/apps');
+   };
+   const hrefForTab=(tab:'today'|'saved')=>{
+    const params=new URLSearchParams(searchParams.toString());
+    if(tab==='saved'){params.set('tab','saved')}else{params.delete('tab')}
+    const query=params.toString();
+    return query?`/apps?${query}`:'/apps';
+   };
+   const handleSortChange=(value:string)=>{
+    navigateWith((params)=>{
+      if(value==='default'){params.delete('sort')}else{params.set('sort',value)}
+    });
+   };
    const {todayPlan,setTodayPlan,savedPlan,setSavedPlan}=context;
    
    const totalCalories=todayPlan.reduce(
@@ -90,11 +113,11 @@ const MyPlanContent = () => {
       <div className="py-5 flex justify-between">
          <div className="flex gap-1 px-2  bg-gray-800 w-50 items-center rounded-2xl h-15 py-5"> 
           <Link
-          href="/apps"
+          href={hrefForTab('today')}
           className={`px-3 py-3  rounded-lg ${activeTab==='today'?" text-[#C2F800] bg-black ":" text-gray-500"}`}>Today&apos;s Plan </Link>
           
            <Link
-          href="/apps?tab=saved"
+          href={hrefForTab('saved')}
           className={`px-5 py-2 rounded-lg ${activeTab==='saved'?"text-[#C2F800] bg-black":" text-gray-500"}`}>Saved </Link>
           </div>
           <div className="flex items-center gap-2">
@@ -102,7 +125,7 @@ const MyPlanContent = () => {
               Sort by
               </label >
               <select value={sortBy}
-              onChange={(e)=>setSortBy(e.target.value)}
+              onChange={(e)=>handleSortChange(e.target.value)}
               className="text-gray-500 border rounded-xl px-2 py-2">
                 <option value="default">Default</option>
                 <option value="duration">Duration</option>

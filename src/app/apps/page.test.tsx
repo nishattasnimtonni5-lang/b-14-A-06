@@ -11,11 +11,13 @@ vi.mock("react-toastify", () => ({
   toast: { info: vi.fn(), success: vi.fn() },
 }));
 
-// jsdom has no Next router, so supply controllable search params instead.
-const searchState = vi.hoisted(() => ({ search: "" }));
+// jsdom has no Next router, so supply controllable search params and a
+// router.push spy instead.
+const navState = vi.hoisted(() => ({ search: "", push: vi.fn() }));
 
 vi.mock("next/navigation", () => ({
-  useSearchParams: () => new URLSearchParams(searchState.search),
+  useSearchParams: () => new URLSearchParams(navState.search),
+  useRouter: () => ({ push: navState.push }),
 }));
 
 // next/link and next/image need the Next runtime; stub them for jsdom.
@@ -51,13 +53,13 @@ describe("MyPlan page", () => {
     localStorage.clear();
     setTodayPlan([]);
     setSavedPlan([]);
-    searchState.search = "";
+    navState.search = "";
     vi.clearAllMocks();
   });
 
   afterEach(cleanup);
 
-  it("keeps insertion order by default and sorts by duration descending", () => {
+  it("keeps insertion order by default and pushes ?sort=duration when sorting", () => {
     // durations: 10, 20, 30
     setTodayPlan([makeWorkout(1), makeWorkout(2), makeWorkout(3)]);
     renderPage();
@@ -68,7 +70,20 @@ describe("MyPlan page", () => {
       target: { value: "duration" },
     });
 
+    // Sort is URL-driven, so the change navigates instead of mutating state.
+    expect(navState.push).toHaveBeenCalledWith("/apps?sort=duration");
+  });
+
+  it("sorts descending when ?sort=duration is in the URL", () => {
+    navState.search = "sort=duration";
+    setTodayPlan([makeWorkout(1), makeWorkout(2), makeWorkout(3)]);
+    renderPage();
+
     expect(headingOrder()).toEqual(["Workout 3", "Workout 2", "Workout 1"]);
+    // Switching tabs must keep the active sort.
+    expect(
+      screen.getByRole("link", { name: "Saved" }).getAttribute("href")
+    ).toBe("/apps?sort=duration&tab=saved");
   });
 
   it("removes a lift via the remove button and toasts", () => {
@@ -97,7 +112,7 @@ describe("MyPlan page", () => {
   });
 
   it("deep-links to the saved tab via ?tab=saved", () => {
-    searchState.search = "tab=saved";
+    navState.search = "tab=saved";
     setSavedPlan([makeWorkout(7)]);
     renderPage();
 
