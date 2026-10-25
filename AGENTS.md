@@ -1,0 +1,42 @@
+# AGENTS.md
+
+Single Next.js 16 (App Router) app: "Fit Log", a workout library. Not a monorepo. No tests, no CI, no formatter.
+
+## Commands
+
+- Install: `npm ci --allow-git=all` — **required**: npm 12 defaults `allow-git=none` and fails with `EALLOWGIT` on the git-hosted `@iconify-react/bx` dependency.
+- Lint: `npm run lint` (bare `eslint`, flat config in `eslint.config.mjs`). Pre-existing warning: unused `ReactNode` in `src/components/shared/Activelink.tsx`.
+- Typecheck: no script exists. `npx tsc --noEmit` only passes **after** `next dev` or `next build` has generated `next-env.d.ts` and `.next/types`. On a fresh clone it fails with `Cannot find name 'LayoutProps'` and `Cannot find module '@/assets/*.png'`.
+- Real verification: `npm run build` — compiles **and** runs Next's own TypeScript pass. Use this as lint+typecheck combined before claiming done.
+- Dev server: `npm run dev`.
+- npm 12 also blocks install scripts by default; the `unrs-resolver` postinstall warning is harmless (lint and build pass without it).
+
+## How it's wired
+
+- Routes in `src/app`: `/` library (server component, statically prerendered), `/apps` My Plan (client component), `/apps/[id]` details (server component, `await params` — params is a Promise), `not-found.tsx`.
+- Data layer: `src/lib/Apps.ts` → `https://api.api-store.workers.dev/api/fitlog`. `getWorkoutDetails` uses `revalidate: 60` and throws on `!res.ok`; `getAllCategory` does **not** check `res.ok`. Because `/` and `/apps` prerender at build time, `npm run build` needs that API reachable.
+- State: React context in `src/app/context/PlanContext.tsx` (`todayPlan`, `savedPlan`), provider mounted in `src/app/layout.tsx`. In-memory only — everything resets on refresh; there is no persistence layer. Consumers bail with `if (!context) return null`.
+- Toasts: `react-toastify`, `<ToastContainer/>` rendered in the root layout (outside the provider). Don't reach for react-hot-toast.
+- Path alias `@/*` → `src/*`. Shared type is `Iworkout` (lowercase `w`) in `src/types/workout.type.ts`.
+
+## Styling
+
+- Tailwind v4 CSS-first: config lives in `src/app/globals.css` (`@import "tailwindcss"`, `@plugin "daisyui"`) plus `postcss.config.mjs`. There is no `tailwind.config.*` — don't create one.
+- Dark theme, accent `#C2F800` via arbitrary values, `md:` breakpoint for desktop layouts.
+- Font: `next/font` Oswald exposed as `--font-oswald`, applied to `body`.
+- `next.config.ts` allows images from any https host (`hostname: '**'`), so remote `workout.image` URLs work as-is.
+
+## Gotchas
+
+- `README.md` is stale: it claims Redux and `react-hot-toast`; the code uses React context and `react-toastify`. Trust the code.
+- `@iconify-react/bx` and `@lineiconshq/react-lineicons` are declared but never imported (icons come from `react-icons`). The git dep is the whole reason install needs `--allow-git=all`; don't add more icon libraries.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
