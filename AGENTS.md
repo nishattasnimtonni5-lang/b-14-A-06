@@ -4,12 +4,13 @@ Single Next.js 16 (App Router) app: "Fit Log", a workout library. Not a monorepo
 
 ## Commands
 
-- Install: `npm ci --allow-git=all` — **required**: npm 12 defaults `allow-git=none` and fails with `EALLOWGIT` on the git-hosted `@iconify-react/bx` dependency.
-- Lint: `npm run lint` (bare `eslint`, flat config in `eslint.config.mjs`). Pre-existing warning: unused `ReactNode` in `src/components/shared/Activelink.tsx`.
-- Typecheck: no script exists. `npx tsc --noEmit` only passes **after** `next dev` or `next build` has generated `next-env.d.ts` and `.next/types`. On a fresh clone it fails with `Cannot find name 'LayoutProps'` and `Cannot find module '@/assets/*.png'`.
+- Install: `npm ci`.
+- Lint: `npm run lint` (bare `eslint`, flat config in `eslint.config.mjs`) — expected clean, 0 problems.
+- Typecheck: `npm run typecheck` (`tsc --noEmit`) only passes **after** `next dev` or `next build` has generated `next-env.d.ts` and `.next/types`. On a fresh clone it fails with `Cannot find name 'LayoutProps'` and `Cannot find module '@/assets/*.png'`.
+- Tests: `npm test` (Vitest), when present.
 - Real verification: `npm run build` — compiles **and** runs Next's own TypeScript pass. Use this as lint+typecheck combined before claiming done.
 - Dev server: `npm run dev`.
-- npm 12 also blocks install scripts by default; the `unrs-resolver` postinstall warning is harmless (lint and build pass without it).
+- npm 12 blocks git dependencies (`allow-git=none`, fails `EALLOWGIT`) and install scripts by default. Adding a `git+ssh` dep to `package.json` will break `npm ci` for everyone — the `unrs-resolver` postinstall warning is harmless (lint and build pass without it).
 
 ## How it's wired
 
@@ -29,7 +30,7 @@ Single Next.js 16 (App Router) app: "Fit Log", a workout library. Not a monorepo
 ## Gotchas
 
 - `README.md` is stale: it claims Redux and `react-hot-toast`; the code uses React context and `react-toastify`. Trust the code.
-- `@iconify-react/bx` and `@lineiconshq/react-lineicons` are declared but never imported (icons come from `react-icons`). The git dep is the whole reason install needs `--allow-git=all`; don't add more icon libraries.
+- Icons come from `react-icons` only — don't add icon libraries, and never add a `git+ssh` dependency (npm 12 blocks it, `npm ci` fails `EALLOWGIT`). `@iconify-react/bx` and `@lineiconshq/react-lineicons` were removed for exactly this reason.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
