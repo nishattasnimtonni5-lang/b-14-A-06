@@ -21,6 +21,10 @@ const handleAdd=()=>{
         toast.info(`${data.name} is already in today's plan.`);
         return;
     }
+    if(todayPlan.length>=5){
+        toast.info("Cap of five lifts for today. Finish one before adding another.");
+        return;
+    }
     setTodayPlan([...todayPlan,data]);
     toast.success(`${data.name} added to today's plan.`)
 };

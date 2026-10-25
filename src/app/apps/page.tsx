@@ -29,14 +29,22 @@ const MyPlan = () => {
    const savedTime=savedPlan.reduce(
     (total,workout)=>total+ Number(workout.duration),0)
    const handleRemove=(id:string,name:string)=>{
-    
-    setTodayPlan(todayPlan.filter((workout)=>String(workout.id)!==String(id)));
-    toast.success(`${name} removed succesfully!`)
+    const exists=todayPlan.some((workout)=>String(workout.id)===String(id));
+    if(!exists)return;
+    setTodayPlan((prev)=>prev.filter((workout)=>String(workout.id)!==String(id)));
+    toast.info(`${name} removed from today's plan.`)
+   }
+   const handleMarkDone=(id:string,name:string)=>{
+    const exists=todayPlan.some((workout)=>String(workout.id)===String(id));
+    if(!exists)return;
+    setTodayPlan((prev)=>prev.filter((workout)=>String(workout.id)!==String(id)));
+    toast.success(`${name} completed. Nice work!`)
    }
    const handleRemovedSaved=(id:string,name:string)=>{
-    
-    setSavedPlan(savedPlan.filter((workout)=>String(workout.id)!==String(id)));
-    toast.success(`${name} removed succesfully!`)
+    const exists=savedPlan.some((workout)=>String(workout.id)===String(id));
+    if(!exists)return;
+    setSavedPlan((prev)=>prev.filter((workout)=>String(workout.id)!==String(id)));
+    toast.info(`${name} removed from your saved plan.`)
    }
   
    const currentPlan=activeTab==='today'?todayPlan:savedPlan;
@@ -107,8 +115,8 @@ const MyPlan = () => {
 
             {todayPlan.length>0?(
      <div className='md:grid md:grid-cols-1 w-full gap-2  rounded-md'>
-           { sortedPlan.map((workout:Iworkout,ind:number)=>{
-            return (<div key={ind} className="flex items-center justify-between rounded-xl bg-gray-900 gap-4 md:gap-0">
+           { sortedPlan.map((workout:Iworkout)=>{
+            return (<div key={workout.id} className="flex items-center justify-between rounded-xl bg-gray-900 gap-4 md:gap-0">
                 <div className="md:px-5 py-5 flex md:gap-5 gap-1">
                     <Image src={workout.image} alt="workoutImage" width={100} height={50} className='rounded-lg md:w-35 w-10 md:h-20 '/>
              <div >
@@ -129,7 +137,7 @@ const MyPlan = () => {
              <div className="flex gap-3">
               <button 
               onClick={()=>
-                handleRemove(String(workout.id),workout.name)
+                handleMarkDone(String(workout.id),workout.name)
                }
               className="bg-[#C2F800] md:px-3  py-2 hover:bg-yellow-400 flex items-center gap-1   rounded-3xl"><MdDone/>Mark as done</button>
                 <button
@@ -162,8 +170,8 @@ const MyPlan = () => {
 
             {savedPlan.length>0?(
       <div className='grid grid-cols-1 w-full rounded-md gap-2'>
-           { sortedPlan.map((workout:Iworkout,ind:number)=>{
-            return (<div key={ind} className="flex items-center justify-between  bg-gray-900  md:px-5 gap-4 md:gap-0 rounded-xl" >
+           { sortedPlan.map((workout:Iworkout)=>{
+            return (<div key={workout.id} className="flex items-center justify-between  bg-gray-900  md:px-5 gap-4 md:gap-0 rounded-xl" >
                 <div className=" py-5 flex gap-5">
                     <Image src={workout.image} alt="workoutImage" width={100} height={50} className='rounded-lg w-10 md:w-35 h-20 '/>
              <div >

@@ -32,11 +32,20 @@ const WorkoutSkeleton = () => {
 
 const WorkoutContent = async () => {
   const data = await getAllCategory();
+  const workouts = Array.isArray(data) ? data : [];
+
+  if (workouts.length === 0) {
+    return (
+      <div className="px-5 text-center">
+        <p className="text-gray-500">No workouts found. Check back soon.</p>
+      </div>
+    );
+  }
 
   return (
     <div className='md:grid md:grid-cols-3 gap-3 px-5'>
-      {data.map((workout: Iworkout, ind: number) => (
-        <WorkoutCard key={ind} workout={workout} />
+      {workouts.map((workout: Iworkout) => (
+        <WorkoutCard key={workout.id} workout={workout} />
       ))}
     </div>
   );
