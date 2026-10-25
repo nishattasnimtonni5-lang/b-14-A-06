@@ -7,14 +7,15 @@ FITLOG is a modern fitness tracking web application designed to help users easil
 
 ## Tech Stack
 
-**Client:** Next.js, Redux, TailwindCSS,TypeScript,Javascript
+**Client:** Next.js, React (Context API), TailwindCSS, daisyUI, TypeScript
 
 ## Key Features
 
 - **Daily Workout Management:** Effortlessly add, view, and remove exercises from your daily plan.
 - **Saved Workout Collection:** Bookmark and manage your favorite workout routines for future reference.
 - **Real-Time Calorie & Duration Tracking:** Automatically computes total time spent and estimated calories burned based on your active plan.
-- **Interactive State Notifications:** Clean toast notifications (via `react-hot-toast`) offer immediate visual feedback for actions like removing exercises.
+- **Interactive State Notifications:** Clean toast notifications (via `react-toastify`) offer immediate visual feedback for actions like removing exercises.
+- **Plans That Survive Refresh:** Today's plan and saved lifts are stored in your browser (`localStorage`), so they're still there when you come back.
 - **Fully Responsive Design:** Seamless user experience across mobile,tablet and desktop (`md`) screen layouts using custom Tailwind CSS design patterns.
 
 

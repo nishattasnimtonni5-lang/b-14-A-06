@@ -11,6 +11,13 @@ vi.mock("react-toastify", () => ({
   toast: { info: vi.fn(), success: vi.fn() },
 }));
 
+// jsdom has no Next router, so supply controllable search params instead.
+const searchState = vi.hoisted(() => ({ search: "" }));
+
+vi.mock("next/navigation", () => ({
+  useSearchParams: () => new URLSearchParams(searchState.search),
+}));
+
 // next/link and next/image need the Next runtime; stub them for jsdom.
 vi.mock("next/link", () => ({
   default: ({ href, children }: { href: unknown; children: React.ReactNode }) => (
@@ -42,7 +49,9 @@ const headingOrder = () =>
 describe("MyPlan page", () => {
   beforeEach(() => {
     localStorage.clear();
+    setTodayPlan([]);
     setSavedPlan([]);
+    searchState.search = "";
     vi.clearAllMocks();
   });
 
@@ -85,5 +94,20 @@ describe("MyPlan page", () => {
       "Workout 1 completed. Nice work!"
     );
     expect(toast.info).not.toHaveBeenCalled();
+  });
+
+  it("deep-links to the saved tab via ?tab=saved", () => {
+    searchState.search = "tab=saved";
+    setSavedPlan([makeWorkout(7)]);
+    renderPage();
+
+    expect(screen.getByText("Workout 7")).toBeTruthy();
+    expect(screen.queryByText("No Plan today")).toBeNull();
+    expect(
+      screen.getByRole("link", { name: "Today's Plan" }).getAttribute("href")
+    ).toBe("/apps");
+    expect(
+      screen.getByRole("link", { name: "Saved" }).getAttribute("href")
+    ).toBe("/apps?tab=saved");
   });
 });

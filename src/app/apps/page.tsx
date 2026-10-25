@@ -3,17 +3,21 @@ import { PlanContext } from '@/app/context/PlanContext';
 
 import { Iworkout } from '@/types/workout.type';
 import Image from 'next/image';
-import React, { useContext,useState } from 'react';
+import React, { Suspense, useContext,useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { MdDone } from 'react-icons/md'
 import { BiTime } from 'react-icons/bi'
 import { GoFlame } from 'react-icons/go'
 import { FiStar } from 'react-icons/fi'
 import { ImCross } from "react-icons/im";
 import { toast } from 'react-toastify';
-const MyPlan = () => {
+const MyPlanContent = () => {
    const context=useContext(PlanContext)
-   const [activeTab,setActiveTab]=useState("today")
+   // The active tab lives in the URL (?tab=saved) so the nav links, sharing,
+   // and browser back/forward all select the right tab.
+   const searchParams=useSearchParams()
+   const activeTab=searchParams.get('tab')==='saved'?'saved':'today'
     const [sortBy,setSortBy]=useState('default')
    if (!context){
     return null;
@@ -85,16 +89,13 @@ const MyPlan = () => {
       </div>
       <div className="py-5 flex justify-between">
          <div className="flex gap-1 px-2  bg-gray-800 w-50 items-center rounded-2xl h-15 py-5"> 
-          <button
-          onClick={()=>
-            setActiveTab("today")
-          }
-          className={`px-3 py-3  rounded-lg ${activeTab==='today'?" text-[#C2F800] bg-black ":" text-gray-500"}`}>Today&apos;s Plan </button>
+          <Link
+          href="/apps"
+          className={`px-3 py-3  rounded-lg ${activeTab==='today'?" text-[#C2F800] bg-black ":" text-gray-500"}`}>Today&apos;s Plan </Link>
           
-           <button
-          onClick={()=>
-            setActiveTab("saved")
-          }  className={`px-5 py-2 rounded-lg ${activeTab==='saved'?"text-[#C2F800] bg-black":" text-gray-500"}`}>Saved </button>
+           <Link
+          href="/apps?tab=saved"
+          className={`px-5 py-2 rounded-lg ${activeTab==='saved'?"text-[#C2F800] bg-black":" text-gray-500"}`}>Saved </Link>
           </div>
           <div className="flex items-center gap-2">
             <label className="text-gray-500">
@@ -213,5 +214,14 @@ const MyPlan = () => {
         </div>
     );
 }
+
+// useSearchParams needs a Suspense boundary on this statically prerendered route.
+const MyPlan = () => (
+  <Suspense
+    fallback={<div className="px-8 py-10 text-gray-500">Loading plan…</div>}
+  >
+    <MyPlanContent />
+  </Suspense>
+);
 
 export default MyPlan;

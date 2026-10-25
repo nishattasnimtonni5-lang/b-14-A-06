@@ -2,8 +2,10 @@ import { Iworkout } from "@/types/workout.type";
 
 const BASE_URL = "https://api.api-store.workers.dev/api/fitlog";
 
+// `/` is statically prerendered; revalidate so the library refreshes every
+// 5 minutes instead of staying frozen at build time.
 export const getAllCategory = async (): Promise<Iworkout[]> => {
-  const res = await fetch(BASE_URL);
+  const res = await fetch(BASE_URL, { next: { revalidate: 300 } });
   if (!res.ok) {
     throw new Error(`Failed to fetch workouts. Status: ${res.status}`);
   }

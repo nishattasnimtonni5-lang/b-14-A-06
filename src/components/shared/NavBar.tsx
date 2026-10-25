@@ -3,7 +3,7 @@ import React from 'react';
 import NavImg from "@/assets/logo.png"
 import Image from 'next/image';
 import Link from 'next/link';
-import PlanCount from './PLanAndSaved';
+import PlanCount from './PlanCount';
 import Activelink from './Activelink';
 const NavBar = () => {
 
@@ -18,7 +18,7 @@ const NavBar = () => {
   <Activelink/>
         <ul className='flex gap-4 md:px-10 pl-5 '>
          <li> <Link href="/apps" className='text-gray-300 flex gap-2'>PLAN <PlanCount type='today'/></Link></li>
-          <li><Link href="/apps" className='text-gray-300 flex gap-2'>SAVED<PlanCount type='saved'/></Link></li>
+          <li><Link href="/apps?tab=saved" className='text-gray-300 flex gap-2'>SAVED<PlanCount type='saved'/></Link></li>
         </ul> 
          </nav>
        

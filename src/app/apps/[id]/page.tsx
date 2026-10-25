@@ -2,7 +2,23 @@ import WorkoutAddButton from '@/components/Apps/WorkoutAddButton';
 import { getWorkoutDetails } from '@/lib/Apps';
 import { IWorkoutDetailsProps } from '@/types/workout.type';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import React from 'react';
+
+// Shares the same fetch as the page below, so Next dedupes it within the request.
+export const generateMetadata = async ({params}:IWorkoutDetailsProps):Promise<Metadata> => {
+  const {id}=await params;
+  try {
+    const data=await getWorkoutDetails(id);
+    return {
+      title: `${data.name} — FitLog`,
+      description: data.description,
+    };
+  } catch {
+    return { title: "Workout — FitLog" };
+  }
+};
+
 const workoutDetails =async ({params}:IWorkoutDetailsProps) => {
   const {id}=await params;
   const data=await getWorkoutDetails(id);

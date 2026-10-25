@@ -15,8 +15,9 @@ Single Next.js 16 (App Router) app: "Fit Log", a workout library. Not a monorepo
 ## How it's wired
 
 - Routes in `src/app`: `/` library (server component, statically prerendered), `/apps` My Plan (client component), `/apps/[id]` details (server component, `await params` — params is a Promise), `not-found.tsx`.
-- Data layer: `src/lib/Apps.ts` → `https://api.api-store.workers.dev/api/fitlog`. `getWorkoutDetails` uses `revalidate: 60` and throws on `!res.ok`; `getAllCategory` does **not** check `res.ok`. Because `/` and `/apps` prerender at build time, `npm run build` needs that API reachable.
-- State: React context in `src/app/context/PlanContext.tsx` (`todayPlan`, `savedPlan`), provider mounted in `src/app/layout.tsx`. In-memory only — everything resets on refresh; there is no persistence layer. Consumers bail with `if (!context) return null`.
+- The My Plan tab is URL-driven (`/apps?tab=saved`, read with `useSearchParams`). It must stay inside a `<Suspense>` boundary or `next build` fails on the prerendered `/apps` route; new tabs need matching `<Link>`s in `NavBar.tsx`.
+- Data layer: `src/lib/Apps.ts` → `https://api.api-store.workers.dev/api/fitlog`. Both fetchers throw on `!res.ok` and failures surface through `src/app/error.tsx`. `getAllCategory` revalidates every 5 min (so `/` is ISR, not frozen), `getWorkoutDetails` every 60s. `npm run build` still needs the API reachable because `/` prerenders.
+- State: `src/app/context/planStore.ts` keeps `todayPlan`/`savedPlan` in a localStorage-backed external store; `PlanContext.tsx` exposes it through `useSyncExternalStore` (provider mounted in `src/app/layout.tsx`). Keep that shape: `react-hooks/set-state-in-effect` rejects setState-in-effect hydration, and the store's server snapshot must stay empty or prerendered HTML mismatches. Consumers bail with `if (!context) return null`.
 - Toasts: `react-toastify`, `<ToastContainer/>` rendered in the root layout (outside the provider). Don't reach for react-hot-toast.
 - Path alias `@/*` → `src/*`. Shared type is `Iworkout` (lowercase `w`) in `src/types/workout.type.ts`.
 
