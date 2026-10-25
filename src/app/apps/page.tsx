@@ -145,7 +145,7 @@ const MyPlan = () => {
               handleRemove(String(workout.id),workout.name)
              }
             className='hover:text-red-500 text-gray-400'
-            ><ImCross /></button>
+             aria-label={`Remove ${workout.name}`}><ImCross /></button>
               </div> 
                </div>
             </div>)
@@ -194,7 +194,7 @@ const MyPlan = () => {
               handleRemovedSaved(String(workout.id),workout.name)
              }
             className='hover:text-red-500 text-gray-400'
-            ><ImCross /></button>
+             aria-label={`Remove ${workout.name}`}><ImCross /></button>
                 </div>
             </div>)
             })}

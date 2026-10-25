@@ -7,7 +7,7 @@ Single Next.js 16 (App Router) app: "Fit Log", a workout library. Not a monorepo
 - Install: `npm ci`.
 - Lint: `npm run lint` (bare `eslint`, flat config in `eslint.config.mjs`) — expected clean, 0 problems.
 - Typecheck: `npm run typecheck` (`tsc --noEmit`) only passes **after** `next dev` or `next build` has generated `next-env.d.ts` and `.next/types`. On a fresh clone it fails with `Cannot find name 'LayoutProps'` and `Cannot find module '@/assets/*.png'`.
-- Tests: `npm test` (Vitest), when present.
+- Tests: `npm test` (Vitest + Testing Library, jsdom) — colocated `src/**/*.test.{ts,tsx}`; mocks for `next/link`, `next/image`, `react-toastify` live in each test.
 - Real verification: `npm run build` — compiles **and** runs Next's own TypeScript pass. Use this as lint+typecheck combined before claiming done.
 - Dev server: `npm run dev`.
 - npm 12 blocks git dependencies (`allow-git=none`, fails `EALLOWGIT`) and install scripts by default. Adding a `git+ssh` dep to `package.json` will break `npm ci` for everyone — the `unrs-resolver` postinstall warning is harmless (lint and build pass without it).
