@@ -14,7 +14,7 @@ Live Website
 
 ## Screenshot
 
-![FITLOG Homepage](./src/assets/screenshot.png)
+![FITLOG Homepage](./src/assets/Screenshot1.png)
 Technologies Used
 
 - Next.js
